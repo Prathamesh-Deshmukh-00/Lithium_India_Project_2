@@ -9,6 +9,7 @@ import ForgetPassword from "./components/ForgetPassword.jsx";
 import OTPVerification from "./components/OtpVerification.jsx";
 import PhoneNumberVerification from "./components/VerifyPhoneNumber.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
+import Sidebar from "./components/DestopVerticalSider.jsx";
 
 function App() {
 
@@ -16,13 +17,14 @@ function App() {
   return (
    <div  className="w-screen h-screen bg-white-200">
  <Header/>
- <Login/>
+ {/* <Login/> */}
  {/* <ForgetPassword/> */}
  {/* <OTPVerification/> */}
  {/* <ResetPassword/> */}
  {/* <Profile/> */}
  {/* <PhoneNumberVerification/> */}
  {/* <ChangePassword/> */}
+ {/* <Sidebar/> */}
  
  </div>
 

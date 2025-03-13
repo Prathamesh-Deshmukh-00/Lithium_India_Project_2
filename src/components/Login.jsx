@@ -3,7 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
+ 
   return (
     <div className="flex items-start justify-center min-h-screen bg-white-100 px-4 pt-28 md:px-0">
       <div className="w-full max-w-xl p-8 bg-white rounded-lg">

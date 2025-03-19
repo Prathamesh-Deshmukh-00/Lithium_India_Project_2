@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PhoneNumberVerification() {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -22,12 +24,46 @@ export default function PhoneNumberVerification() {
     }
   };
 
+  const handleSubmit = () => {
+    if (otp.includes("")) {
+      toast.error("Please enter all digits of the OTP.");
+      return;
+    }
+
+    const otpValue = otp.join("");
+    console.log("OTP to send:", otpValue);
+
+    // Simulated validation: Assume OTP is "12345" for success
+    if (otpValue === "12345") {
+      toast.success("OTP Verified Successfully!");
+      setOtp(["", "", "", "", ""])
+    } else {
+      toast.error("Invalid OTP. Try again.");
+      setOtp(["", "", "", "", ""])
+    }
+  };
+
   return (
-    <div className="flex items-start justify-center min-h-screen ">
+    <div className="flex items-start mt-10 justify-center min-h-screen">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{ fontSize: "16px", textAlign: "center" }}
+        className="custom-toast-container"
+      />
       <div className="w-full max-w-md p-6 bg-white rounded-lg">
-        <h2 className="text-2xl mb-2 font-semibold text-center">Verify Phone Number</h2>
+        <h2 className="text-2xl mb-2 font-semibold text-center">
+          Verify Phone Number
+        </h2>
         <p className="text-center text-gray-500 text-sm">
-        Please Enter OTP that has been sent to your phone
+          Please enter the OTP sent to your phone
         </p>
         <div className="flex justify-center gap-3 mt-6 mb-2">
           {otp.map((digit, index) => (
@@ -43,11 +79,14 @@ export default function PhoneNumberVerification() {
             />
           ))}
         </div>
-        <p className="text-end mr-14 text-sm text-blue-500 cursor-pointer ">
+        <p className="text-end mr-14 text-sm text-blue-500 cursor-pointer">
           Resend OTP
         </p>
         <div className="flex justify-center">
-          <button className="w-[30%] mt-6 py-2 bg-[#019D6D] text-white font-semibold rounded-lg hover:bg-green-700">
+          <button
+            onClick={handleSubmit}
+            className="w-[30%] mt-6 py-2 bg-[#019D6D] text-white font-semibold rounded-lg hover:bg-green-700"
+          >
             Next
           </button>
         </div>

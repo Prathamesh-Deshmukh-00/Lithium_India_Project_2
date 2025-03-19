@@ -1,6 +1,5 @@
-
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import "tailwindcss";
 
 body {
   width: 100vw;  /* 100% of the viewport width */
@@ -8,11 +7,3 @@ body {
   background-color: white;
   font-family: 'Poppins', sans-serif;
 }
-
-
-
-
-
-
-
-

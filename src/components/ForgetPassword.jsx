@@ -1,7 +1,31 @@
+import { useState } from "react";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function ForgetPassword() {
+  const [email, setEmail] = useState("");
+
+  // Email validation function
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateEmail(email)) {
+      toast.error("Invalid email!");
+      return;
+    }
+
+    toast.success("OTP sent to your email!");
+  };
+
   return (
-    <div className="flex items-start justify-center min-h-screen bg-white-100 px-4 md:px-0">
-      <div className="w-full max-w-lg p-8 bg-white rounded-lg">
+    <div className="flex mt-10 items-start justify-center min-h-screen bg-white-100 px-4 md:px-0 relative">
+      <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl mb-4 font-semibold text-center text-gray-800 mt-4">
           Forget password
         </h2>
@@ -9,12 +33,12 @@ export default function ForgetPassword() {
           Please enter your registered email, we will send you a verification code.
         </p>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-500 text-sm text-left font-medium mb-2">
               Email
             </label>
-            <div className="flex items-center px-3 py-2  border border-gray-300 rounded-lg">
+            <div className="flex items-center px-3 py-2 border border-gray-300 rounded-lg">
               <span className="text-green-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +64,8 @@ export default function ForgetPassword() {
                 type="email"
                 placeholder="Enter your email"
                 className="w-full bg-transparent focus:outline-none ml-2"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -53,6 +79,37 @@ export default function ForgetPassword() {
           </button>
         </form>
       </div>
+
+      {/* Toast Notifications - Centered Horizontally */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Slide}
+        toastStyle={{ fontSize: "16px", textAlign: "center" }}
+        className="custom-toast-container"
+      />
+
+      {/* Custom CSS for Horizontal Alignment */}
+      <style jsx>{`
+        .custom-toast-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: auto;
+          gap: 10px;
+        }
+      `}</style>
     </div>
   );
 }
